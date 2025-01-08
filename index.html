@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Server</title>
+</head>
+<body>
+    <h1>Echo Server</h1>
+    <input id="message" type="text" placeholder="Enter message">
+    <button onclick="sendMessage()">Send</button>
+    <p id="response"></p>
+
+    <script>
+        async function sendMessage() {
+            const message = document.getElementById('message').value;
+            const response = await fetch('/echo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: message
+            });
+            const text = await response.text();
+            document.getElementById('response').innerText = text;
+        }
+    </script>
+</body>
+</html>
